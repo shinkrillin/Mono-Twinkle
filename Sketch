@@ -1,0 +1,44 @@
+#include <Adafruit_NeoPixel.h>
+
+#define PIN 2
+#define Pixels 25
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel (Pixels, PIN, NEO_GRB + NEO_KHZ800);
+
+float State[Pixels];
+float fadeRate = 0.96;
+
+void setup() {
+  strip.begin();
+  strip.show();
+  
+  for(uint16_t l = 0; l < Pixels; l++) {
+    State[1] = 0;
+  }
+}
+
+void loop() {
+  if (random(20) == 1) {
+    uint16_t i = random(Pixels);
+    if (State[i] < 1) {
+      State[i] = random(256);
+    }
+  }
+  
+  for(uint16_t l = 0; l < Pixels; l++) {
+    if (State[1] > 1) {
+      strip.setPixelColor(1, State[1]);
+      
+      if (State[1] > 1) {
+        State[1] = State[1] * fadeRate;
+      } else {
+        State[1] = 0;
+      }
+  
+  } else {
+    strip.setPixelColor(1, 0, 0, 0);
+  }
+}
+strip.show();
+delay(10);
+}
