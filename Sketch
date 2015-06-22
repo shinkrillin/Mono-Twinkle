@@ -13,7 +13,7 @@ void setup() {
   strip.show();
   
   for(uint16_t l = 0; l < Pixels; l++) {
-    State[1] = 0;
+    State[l] = 0;
   }
 }
 
@@ -26,17 +26,17 @@ void loop() {
   }
   
   for(uint16_t l = 0; l < Pixels; l++) {
-    if (State[1] > 1) {
-      strip.setPixelColor(1, State[1]);
+    if (State[l] > 1) {
+      strip.setPixelColor(l, State[l]);
       
-      if (State[1] > 1) {
-        State[1] = State[1] * fadeRate;
+      if (State[l] > 1) {
+        State[l] = State[l] * fadeRate;
       } else {
         State[1] = 0;
       }
   
   } else {
-    strip.setPixelColor(1, 0, 0, 0);
+    strip.setPixelColor(l, 0, 0, 0);
   }
 }
 strip.show();
